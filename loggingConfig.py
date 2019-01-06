@@ -18,4 +18,4 @@ def setup_logging(
             config = yaml.safe_load(f.read())
         logging.config.dictConfig(config)
     else:
-        logging.basicConfig(logging.WARNING)
+        logging.basicConfig()

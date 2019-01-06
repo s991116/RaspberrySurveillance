@@ -38,7 +38,7 @@ class ImageUpload:
                         cv2.imwrite(t.path, frame)
 
                         # upload the image to Dropbox and cleanup the tempory image
-                        ts = self.timestamp.strftime("%A %d %B %Y %I:%M:%S%p")
+                        ts = self.timestamp.strftime("%Y-%m-%d %H:%M:%S")
                         logger.info("[UPLOAD] {}".format(ts))
                         path = "/{base_path}/{timestamp}.jpg".format(
                             base_path=self.conf["dropbox_base_path"], timestamp=ts)

@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "run_surveillance.py", line 1, in <module>
+    from surveillance.surveillanceCamera import SurveillanceCamera
+  File "/home/pi/Projects/surveillance/surveillance/surveillanceCamera.py", line 5, in <module>
+    import cv2
+ImportError: No module named cv2

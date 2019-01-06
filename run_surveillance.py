@@ -7,13 +7,19 @@ import warnings
 import json
 import logging
 
-setup_logging()
-logger = logging.getLogger(__name__)
-
 ap = argparse.ArgumentParser()
 ap.add_argument("-c", "--conf", required=True,
 	help="path to the JSON configuration file")
+ap.add_argument("-l", "--logging", required=False,
+	help="path to the YAML loggingconfiguration file")
 args = vars(ap.parse_args())
+
+if args["logging"] is not None:
+	print("Loggingfile:" + args["logging"])
+	setup_logging(args["logging"])
+else:
+	setup_logging()
+logger = logging.getLogger(__name__)
 
 # filter warnings, load the configuration and initialize the Dropbox
 # client
