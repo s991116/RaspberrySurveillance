@@ -1,5 +1,7 @@
 from surveillance.surveillanceCamera import SurveillanceCamera
 from surveillance.imageUpload import ImageUpload
+from surveillance.dropboxProvider import DropboxProvider
+
 from surveillance.surveillance import Surveillance
 from loggingConfig import setup_logging
 import argparse
@@ -27,7 +29,8 @@ warnings.filterwarnings("ignore")
 conf = json.load(open(args["conf"]))
 
 camera = SurveillanceCamera(conf)
-imageUpload = ImageUpload(conf)
+dropboxProvider = DropboxProvider(conf)
+imageUpload = ImageUpload(conf, dropboxProvider)
 s = Surveillance(conf, camera)
 
 s.setBackground()
