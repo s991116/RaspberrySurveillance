@@ -5,11 +5,12 @@ import logging
 logger = logging.getLogger(__name__)
 
 class ImageUpload:
-    def __init__(self, conf, uploadProvider):
+    def __init__(self, conf, uploadProvider, dataUpload):
         self.conf = conf
         self.uploadProvider = uploadProvider
         self.lastUploaded = datetime.datetime.now()
         self.motionCounter = 0
+        self.dataUpload = dataUpload
 
 
     def Upload(self, frame, frameChanged):
@@ -28,6 +29,7 @@ class ImageUpload:
                     # check to see if dropbox sohuld be used
                     try:
                         self.uploadProvider.Upload(frame, self.timestamp)
+                        self.dataUpload.Upload({"time":self.timestamp})
                     except:
                         logger.warning("Unable to upload image")
 

@@ -1,6 +1,8 @@
 from surveillance.surveillanceCamera import SurveillanceCamera
 from surveillance.imageUpload import ImageUpload
 from surveillance.dropboxProvider import DropboxProvider
+from surveillance.mongoProvider import MongoProvider
+from surveillance.dataUpload import DataUpload
 
 from surveillance.surveillance import Surveillance
 from loggingConfig import setup_logging
@@ -29,8 +31,12 @@ warnings.filterwarnings("ignore")
 conf = json.load(open(args["conf"]))
 
 camera = SurveillanceCamera(conf)
+mongoProvider = MongoProvider(conf["mongodb_connection"])
+dataUpload = DataUpload(mongoProvider)
+
 dropboxProvider = DropboxProvider(conf)
-imageUpload = ImageUpload(conf, dropboxProvider)
+imageUpload = ImageUpload(conf, dropboxProvider, dataUpload)
+
 s = Surveillance(conf, camera)
 
 s.setBackground()

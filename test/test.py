@@ -2,9 +2,12 @@ import unittest
 import logging
 from surveillance.surveillance import Surveillance
 from surveillance.imageUpload import ImageUpload
+from surveillance.dataUpload import DataUpload
+
 
 from cameraStub import CameraStub
 from uploadProviderStub import UploadProviderStub
+from dbConnectionStub import DbConnectionStub
 
 class TestSurveillance(unittest.TestCase):
 
@@ -49,12 +52,26 @@ class TestSurveillance(unittest.TestCase):
         uploadProvider = UploadProviderStub()
         uploadProvider.ThrowException = True
         logging.basicConfig()
-        sut = ImageUpload(conf, uploadProvider)
+        dbConnection = DbConnectionStub()
+        dataUpload = DataUpload(dbConnection)
+        sut = ImageUpload(conf, uploadProvider, dataUpload)
         frame = None
 
         #Act
         #Assert (Exception is not throwned)
         sut.Upload(frame, True)
+
+    def test_SendDataToDatabase(self):
+        #Arrange
+        testData = 42
+        dbConnection = DbConnectionStub()
+        sut = DataUpload(dbConnection)
+
+        #Act
+        sut.Upload(testData)
+
+        #Assert
+        self.assertTrue(testData in dbConnection.table)
 
 
 if __name__ == '__main__':
