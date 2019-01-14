@@ -1,5 +1,5 @@
-#Camera Surveillance 
-##with Raspberry, OpenCV and Raspberry Camera
+# Camera Surveillance 
+## with Raspberry, OpenCV and Raspberry Camera
 
 To start surveillance: python run_surveillance.py -c conf.json
 conf.json is configuration to use.
