@@ -1,9 +1,6 @@
 from surveillance.surveillanceCamera import SurveillanceCamera
 from surveillance.imageUpload import ImageUpload
 from surveillance.dropboxProvider import DropboxProvider
-from surveillance.mongoProvider import MongoProvider
-from surveillance.dataUpload import DataUpload
-
 from surveillance.surveillance import Surveillance
 from loggingConfig import setup_logging
 import argparse
@@ -16,6 +13,8 @@ ap.add_argument("-c", "--conf", required=True,
 	help="path to the JSON configuration file")
 ap.add_argument("-l", "--logging", required=False,
 	help="path to the YAML loggingconfiguration file")
+ap.add_argument("-t", "--token", required=False,
+        help="Token for Dropbox upload")
 args = vars(ap.parse_args())
 
 if args["logging"] is not None:
@@ -30,12 +29,12 @@ logger = logging.getLogger(__name__)
 warnings.filterwarnings("ignore")
 conf = json.load(open(args["conf"]))
 
-camera = SurveillanceCamera(conf)
-mongoProvider = MongoProvider(conf["mongodb_connection"])
-dataUpload = DataUpload(mongoProvider)
+if args["token"] is not None:
+	conf["dropbox_access_token"] = args["token"]
 
+camera = SurveillanceCamera(conf)
 dropboxProvider = DropboxProvider(conf)
-imageUpload = ImageUpload(conf, dropboxProvider, dataUpload)
+imageUpload = ImageUpload(conf, dropboxProvider)
 
 s = Surveillance(conf, camera)
 

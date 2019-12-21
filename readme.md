@@ -4,7 +4,7 @@
 To start surveillance: python run_surveillance.py -c conf.json
 conf.json is configuration to use.
 
-To run test: python -m unittest discover -v
+To run test, from project-folder run: python -m unittest discover -v
 
 
 Parameters in configurationfile:
@@ -21,5 +21,8 @@ Parameters in configurationfile:
 	"resolution": [640, 480],
 	"fps": 16,
 	"min_area": 500
-	"mongodb_connection": ""
 }
+
+External modules:
+dnspython
+pyaml

@@ -1,4 +1,4 @@
 *.py[cod]
 *$py.class
-
+*.jpg
 conf.json

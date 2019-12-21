@@ -22,8 +22,8 @@ class DropboxProvider:
 
             # upload the image to Dropbox and cleanup the tempory image
             ts = timestamp.strftime("%Y-%m-%d %H:%M:%S")
-            logger.info("[UPLOAD] {}".format(ts))
             path = "/{base_path}/{timestamp}.jpg".format(
                 base_path=self.conf["dropbox_base_path"], timestamp=ts)
+            logger.info("[UPLOAD] {}".format(path))
             self.client.files_upload(open(t.path, "rb").read(), path)
             t.cleanup()
