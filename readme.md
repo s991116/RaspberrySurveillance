@@ -22,8 +22,8 @@ Parameters in configurationfile:
 }
 
 ## External modules:
-dnspython
-pyaml
+* dnspython
+* pyaml
 
 ## Startup script
 A template startupscript could look like this
