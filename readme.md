@@ -21,14 +21,15 @@ Parameters in configurationfile:
 	"min_area": 500
 }
 
-##External modules:
+## External modules:
 dnspython
 pyaml
 
-##Startup script
+## Startup script
 A template startupscript could look like this
-
+```bash
 #!/bin/bash
 source /home/pi/.virtualenvs/cv/bin/activate
 cd /home/pi/projects/RaspberrySurveillance/
-python run_surveillance.py -c conf.json -t <Dropbox token>a -l loggingErrorConfig.yaml &
+python run_surveillance.py -c conf.json -t <Dropbox token> -l loggingErrorConfig.yaml &
+````
