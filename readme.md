@@ -6,9 +6,7 @@ conf.json is configuration to use.
 
 To run test, from project-folder run: python -m unittest discover -v
 
-
 Parameters in configurationfile:
-
 {
 	"show_video": false,
 	"use_dropbox": true,
@@ -23,6 +21,14 @@ Parameters in configurationfile:
 	"min_area": 500
 }
 
-External modules:
+##External modules:
 dnspython
 pyaml
+
+##Startup script
+A template startupscript could look like this
+
+#!/bin/bash
+source /home/pi/.virtualenvs/cv/bin/activate
+cd /home/pi/projects/RaspberrySurveillance/
+python run_surveillance.py -c conf.json -t <Dropbox token>a -l loggingErrorConfig.yaml &

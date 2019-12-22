@@ -18,7 +18,6 @@ ap.add_argument("-t", "--token", required=False,
 args = vars(ap.parse_args())
 
 if args["logging"] is not None:
-	print("Loggingfile:" + args["logging"])
 	setup_logging(args["logging"])
 else:
 	setup_logging()
@@ -39,6 +38,7 @@ imageUpload = ImageUpload(conf, dropboxProvider)
 s = Surveillance(conf, camera)
 
 s.setBackground()
+
 while(True):
 	changed, frame = s.detectChange()
 	if(changed):
